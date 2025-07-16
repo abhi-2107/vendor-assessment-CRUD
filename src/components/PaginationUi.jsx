@@ -33,7 +33,7 @@ function PaginationUi({ onChange, prev, next, first, last }) {
               </PaginationLink>
             </PaginationItem>
           )}
-          {prev && prev - first > 5 && (
+          {prev && prev - first > 0 && (
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
@@ -50,7 +50,7 @@ function PaginationUi({ onChange, prev, next, first, last }) {
               </PaginationLink>
             </PaginationItem>
           )}
-          {next && last - next > 5 && (
+          {next && last - next > 0 && (
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
