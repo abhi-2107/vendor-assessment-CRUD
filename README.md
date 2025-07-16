@@ -20,3 +20,7 @@ GET /vendors?\_page=1&\_per_page=25
 ---
 
 Hint : To work with searchbar plase use exact name or vendorId etc. as json-server only supports exact match from database
+
+## Demo
+
+https://drive.google.com/file/d/1WSEvJakJED4wFVG1Ke_Ji3muPU6Jlb3X/view?usp=sharing
