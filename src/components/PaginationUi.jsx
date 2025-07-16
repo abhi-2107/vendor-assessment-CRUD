@@ -11,12 +11,15 @@ import {
 
 function PaginationUi({ onChange, pages, prev, next, first, last }) {
   return (
-    <div>
-      <Pagination>
+    <div className="mt-5">
+      <Pagination >
         <PaginationContent>
           {prev && (
             <PaginationItem>
-              <PaginationPrevious onClick={() => onChange(prev)} />
+              <PaginationPrevious
+                className="cursor-pointer"
+                onClick={() => onChange(prev)}
+              />
             </PaginationItem>
           )}
           {first && (
@@ -35,11 +38,6 @@ function PaginationUi({ onChange, pages, prev, next, first, last }) {
               <PaginationEllipsis />
             </PaginationItem>
           )}
-
-
-
-
-
 
           {prev && next && (
             <PaginationItem>
@@ -70,7 +68,10 @@ function PaginationUi({ onChange, pages, prev, next, first, last }) {
 
           {next && (
             <PaginationItem>
-              <PaginationNext onClick={() => onChange(next)} />
+              <PaginationNext
+                className="cursor-pointer"
+                onClick={() => onChange(next)}
+              />
             </PaginationItem>
           )}
         </PaginationContent>

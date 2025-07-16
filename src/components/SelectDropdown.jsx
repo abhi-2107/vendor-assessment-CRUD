@@ -1,9 +1,29 @@
-import React from 'react'
+import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-function SelectDropdown() {
+function SelectDropdown({ placeholder, options = [], value, onChange }) {
   return (
-    <div>SelectDropdown</div>
-  )
+    <div>
+      <Select value={value} onValueChange={onChange}>
+        <SelectTrigger>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((item, index) => (
+            <SelectItem className="w-full" key={index} value={item}>
+              {item}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
 }
 
-export default SelectDropdown
+export default SelectDropdown;

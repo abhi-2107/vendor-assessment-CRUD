@@ -36,7 +36,18 @@ function VendorTable({ vendors = [] }) {
               <TableCell>{vendor.type}</TableCell>
               <TableCell>{vendor.category}</TableCell>
               <TableCell>{vendor.location}</TableCell>
-              <TableCell>{vendor.status}</TableCell>
+              <TableCell>
+                {" "}
+                <span
+                  className={
+                    vendor.status === "Active"
+                      ? "bg-green-100 text-green-800 border-green-300 border rounded-sm shadow px-1"
+                      : "bg-red-100 text-red-800 border border-red-300 rounded-sm shadow px-1"
+                  }
+                >
+                  {vendor.status}
+                </span>{" "}
+              </TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           ))}

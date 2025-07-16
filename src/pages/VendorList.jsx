@@ -1,4 +1,5 @@
 import PaginationUi from "@/components/PaginationUi";
+import SelectDropdown from "@/components/SelectDropdown";
 import VendorTable from "@/components/VendorTable";
 import { getData } from "@/utils/getData";
 import React, { useEffect, useState } from "react";
@@ -27,7 +28,7 @@ function VendorList() {
   console.log(vendorsResponse);
 
   return (
-    <div>
+    <div className="p-3">
       {vendorsResponse.loading && "Loading..."}
       {vendorsResponse.error && (
         <p className="text-red-600">
@@ -35,8 +36,22 @@ function VendorList() {
         </p>
       )}
 
+      <div className="mb-5">
+        <span className="inline-flex items-center gap-2 font-semibold">
+          show{" "}
+          <SelectDropdown
+            placeholder=""
+            options={[10, 25, 50, 100]}
+            size={50}
+            value={pageSize}
+            onChange={setPageSize}
+          />
+          entries
+        </span>
+      </div>
+
       {vendorsResponse.data && (
-        <>
+      <>
           <VendorTable vendors={vendorsResponse.data?.data} />
           <PaginationUi
             {...vendorsResponse.data}
