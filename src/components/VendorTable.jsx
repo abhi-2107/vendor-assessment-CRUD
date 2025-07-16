@@ -13,7 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 import EditVendorModal from "./EditVendorModal";
 
 function VendorTable({ vendors = [] }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModalId, setOpenModalId] = useState(null);
   return (
     <div>
       <ToastContainer />
@@ -62,20 +62,24 @@ function VendorTable({ vendors = [] }) {
                 <span className="inline-flex gap-3">
                   <span
                     className="text-blue-800 rounded-full cursor-pointer hover:bg-blue-200 p-1"
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={() => setOpenModalId(vendor.vendorID)}
                   >
                     <FaUserEdit />{" "}
-                    <EditVendorModal
-                      open={isModalOpen}
-                      onOpenChange={setIsModalOpen}
-                      vendor={vendor}
-                      onUpdate={(updated) => {
-                        console.log("Updated", updated);
-                        setIsModalOpen(false);
-                        toast('Content updated successfully...')
-                      }}
-                    />
                   </span>
+                  <EditVendorModal
+                    key={vendor.vendorID}
+                    open={openModalId === vendor.vendorID}
+                    onClose={() => {
+                      setOpenModalId(null);
+                      console.log("onclose paraent k andar" + vendor.vendorID);
+                    }}
+                    vendor={vendor}
+                    onUpdate={(updated) => {
+                      console.log("Updated", updated);
+                      setOpenModalId(null);
+                      toast("Content updated successfully...");
+                    }}
+                  />
                   <span
                     className="text-green-800 cursor-pointer rounded-full hover:bg-green-200 p-1"
                     onClick={() => toast(`Email sent to ${vendor.email}`)}

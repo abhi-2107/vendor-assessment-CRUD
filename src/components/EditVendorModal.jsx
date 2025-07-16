@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogClose,
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -19,13 +20,9 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-export default function EditVendorModal({
-  vendor,
-  open,
-  onOpenChange,
-  onUpdate,
-}) {
+export default function EditVendorModal({ vendor, open, onClose, onUpdate }) {
   const [form, setForm] = useState({
+    vendorId: "",
     name: "",
     email: "",
     category: "",
@@ -38,6 +35,7 @@ export default function EditVendorModal({
   useEffect(() => {
     if (vendor) {
       setForm({
+        vendorId: vendor.vendorID,
         name: vendor.name || "",
         email: vendor.email || "",
         category: vendor.category || "",
@@ -62,7 +60,16 @@ export default function EditVendorModal({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(val) => {
+        if (val == false) {
+            console.log('onclose if k andar')
+          onClose();
+        }
+        console.log(val)
+      }}
+    >
       <form>
         <DialogContent className="max-w-md ">
           <DialogHeader>
@@ -172,6 +179,9 @@ export default function EditVendorModal({
           </div>
 
           <DialogFooter>
+            <DialogClose asChild onClick={onClose}>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
             <Button onClick={handleSubmit}>Save</Button>
           </DialogFooter>
         </DialogContent>
