@@ -1,11 +1,10 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
+import VendorList from "./pages/VendorList";
 
 function App() {
   return (
     <>
-      <h1 className="text-2xl">Let's begin</h1>
-        <Button>Click me</Button>
+      <VendorList />
     </>
   );
 }
