@@ -1,38 +1,48 @@
+import PaginationUi from "@/components/PaginationUi";
 import VendorTable from "@/components/VendorTable";
 import { getData } from "@/utils/getData";
 import React, { useEffect, useState } from "react";
 
+const DEFAULT_API_STATE = {
+  data: null,
+  error: null,
+  loading: false,
+};
 function VendorList() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [vendors, SetVendors] = useState(null);
+  const [vendorsResponse, setVendorsResponse] = useState(DEFAULT_API_STATE);
+  const [pageSize, setPageSize] = useState(10);
+  const [pageNo, setPageNo] = useState(12);
+
   useEffect(() => {
-    setLoading(true);
-    const timerId = setTimeout(() => {
-      getData()
-        .then((data) => {
-          SetVendors(data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setError(true);
-          setLoading(false);
-          console.log(err);
-        });
-    }, Math.random() * 1000);
-    return () => clearTimeout(timerId);
-  }, []);
-  console.log(vendors);
+    setVendorsResponse({ ...DEFAULT_API_STATE, loading: true });
+    getData(pageNo, pageSize)
+      .then((data) => {
+        setVendorsResponse({ ...DEFAULT_API_STATE, data });
+      })
+      .catch((error) => {
+        setVendorsResponse({ ...DEFAULT_API_STATE, error });
+        console.log(error);
+      });
+  }, [pageNo, pageSize]);
+  console.log(vendorsResponse);
+
   return (
     <div>
-      {loading ? (
-        "Loading..."
-      ) : error ? (
+      {vendorsResponse.loading && "Loading..."}
+      {vendorsResponse.error && (
         <p className="text-red-600">
           *Error loading data, Please refresh the page!
         </p>
-      ) : (
-        <VendorTable vendors={vendors?.data} />
+      )}
+
+      {vendorsResponse.data && (
+        <>
+          <VendorTable vendors={vendorsResponse.data?.data} />
+          <PaginationUi
+            {...vendorsResponse.data}
+            onChange={(pn) => setPageNo(pn)}
+          />
+        </>
       )}
     </div>
   );

@@ -26,10 +26,13 @@ function VendorTable({ vendors = [] }) {
         </TableHeader>
         <TableBody>
           {vendors.map((vendor, index) => (
-            <TableRow key={vendor.vendorID}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{vendor.name}</TableCell>
-              <TableCell>{vendor.vendorID}</TableCell>
+            <TableRow
+              key={vendor.vendorID}
+              className={`${index % 2 !== 0 && "bg-gray-100"}`}
+            >
+              <TableCell>{vendor.id}</TableCell>
+              <TableCell className="w-sm">{vendor.name}</TableCell>
+              <TableCell> {vendor.vendorID}</TableCell>
               <TableCell>{vendor.type}</TableCell>
               <TableCell>{vendor.category}</TableCell>
               <TableCell>{vendor.location}</TableCell>
