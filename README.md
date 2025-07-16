@@ -12,5 +12,7 @@
    DELETE /vendors/:id
    GET /vendors?\_page=1&\_per_page=25
 
-4. to start dev server run `npm run dev` on new terminal
-   
+
+4. to start dev server run `npm run dev` on new terminal. UI will show up on `http://localhost:5173/`
+
+Hint 

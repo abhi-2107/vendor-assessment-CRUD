@@ -6,12 +6,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import React from "react";
+import React, { useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { BsFillSendArrowUpFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
+import EditVendorModal from "./EditVendorModal";
 
 function VendorTable({ vendors = [] }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div>
       <ToastContainer />
@@ -58,8 +60,21 @@ function VendorTable({ vendors = [] }) {
               </TableCell>
               <TableCell>
                 <span className="inline-flex gap-3">
-                  <span className="text-blue-800 rounded-full cursor-pointer hover:bg-blue-200 p-1">
+                  <span
+                    className="text-blue-800 rounded-full cursor-pointer hover:bg-blue-200 p-1"
+                    onClick={() => setIsModalOpen(true)}
+                  >
                     <FaUserEdit />{" "}
+                    <EditVendorModal
+                      open={isModalOpen}
+                      onOpenChange={setIsModalOpen}
+                      vendor={vendor}
+                      onUpdate={(updated) => {
+                        console.log("Updated", updated);
+                        setIsModalOpen(false);
+                        toast('Content updated successfully...')
+                      }}
+                    />
                   </span>
                   <span
                     className="text-green-800 cursor-pointer rounded-full hover:bg-green-200 p-1"

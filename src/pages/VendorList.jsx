@@ -18,7 +18,7 @@ const DEFAULT_API_STATE = {
 function VendorList() {
   const [vendorsResponse, setVendorsResponse] = useState(DEFAULT_API_STATE);
   const [pageSize, setPageSize] = useState(10);
-  const [pageNo, setPageNo] = useState(12);
+  const [pageNo, setPageNo] = useState(1);
   const [search, setSearch] = useState({
     type: "name",
     value: "",
