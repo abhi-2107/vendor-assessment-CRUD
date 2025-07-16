@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-function PaginationUi({ onChange, pages, prev, next, first, last }) {
+function PaginationUi({ onChange, prev, next, first, last }) {
   return (
     <div className="mt-5">
       <Pagination >
