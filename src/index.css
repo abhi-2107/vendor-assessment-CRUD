@@ -1,3 +1,5 @@
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -116,5 +118,40 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Container */
+.loader-bar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background-color: #e5e7eb; /* Tailwind's gray-200 */
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* Moving Bar */
+.loader-bar::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  background-color: #3b82f6; /* Tailwind's blue-500 */
+  animation: slide 1.2s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+@keyframes slide {
+  0% {
+    left: -30%;
+  }
+  50% {
+    left: 35%;
+    width: 30%;
+  }
+  100% {
+    left: 100%;
+    width: 0%;
   }
 }

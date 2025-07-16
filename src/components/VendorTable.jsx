@@ -7,16 +7,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React from "react";
+import { FaUserEdit } from "react-icons/fa";
+import { BsFillSendArrowUpFill } from "react-icons/bs";
 
 function VendorTable({ vendors = [] }) {
   return (
     <div>
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className="bg-zinc-200 rounded-lg hover:bg-zinc-200">
             <TableHead className="w-max">Sr.No</TableHead>
             <TableHead>Name</TableHead>
             <TableHead className="w-max">Vendor Id</TableHead>
+            <TableHead className="w-max">Date</TableHead>
             <TableHead className="w-max">Type</TableHead>
             <TableHead className="w-max">Category</TableHead>
             <TableHead className="w-max">Location</TableHead>
@@ -33,6 +36,7 @@ function VendorTable({ vendors = [] }) {
               <TableCell>{vendor.id}</TableCell>
               <TableCell className="w-sm">{vendor.name}</TableCell>
               <TableCell> {vendor.vendorID}</TableCell>
+              <TableCell> {vendor.createdAt}</TableCell>
               <TableCell>{vendor.type}</TableCell>
               <TableCell>{vendor.category}</TableCell>
               <TableCell>{vendor.location}</TableCell>
@@ -48,7 +52,12 @@ function VendorTable({ vendors = [] }) {
                   {vendor.status}
                 </span>{" "}
               </TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell>
+                <span className="inline-flex gap-3">
+                  <FaUserEdit className="text-blue-800 rounded-full cursor-pointer hover:bg-blue-200 " />{" "}
+                  <BsFillSendArrowUpFill className="text-green-800 cursor-pointer hover:bg-green-50 " />{" "}
+                </span>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

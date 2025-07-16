@@ -7,11 +7,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function SelectDropdown({ placeholder, options = [], value, onChange }) {
+function SelectDropdown({
+  placeholder,
+  options = [],
+  value,
+  onChange,
+  className,
+}) {
   return (
     <div>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger>
+        <SelectTrigger className={className}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
