@@ -6,9 +6,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import React, { useState } from "react";
-import { FaUserEdit } from "react-icons/fa";
-import { BsFillSendArrowUpFill } from "react-icons/bs";
+import { FaTrash, FaUserEdit } from "react-icons/fa";
+import { BsFillSendArrowUpFill, BsThreeDotsVertical } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import EditVendorModal from "./EditVendorModal";
 
@@ -58,35 +63,48 @@ function VendorTable({ vendors = [] }) {
                   {vendor.status}
                 </span>{" "}
               </TableCell>
-              <TableCell>
-                <span className="inline-flex gap-3">
-                  <span
-                    className="text-blue-800 rounded-full cursor-pointer hover:bg-blue-200 p-1"
-                    onClick={() => setOpenModalId(vendor.vendorID)}
-                  >
-                    <FaUserEdit />{" "}
-                  </span>
-                  <EditVendorModal
-                    key={vendor.vendorID}
-                    open={openModalId === vendor.vendorID}
-                    onClose={() => {
-                      setOpenModalId(null);
-                      console.log("onclose paraent k andar" + vendor.vendorID);
-                    }}
-                    vendor={vendor}
-                    onUpdate={(updated) => {
-                      console.log("Updated", updated);
-                      setOpenModalId(null);
-                      toast("Content updated successfully...");
-                    }}
-                  />
-                  <span
-                    className="text-green-800 cursor-pointer rounded-full hover:bg-green-200 p-1"
-                    onClick={() => toast(`Email sent to ${vendor.email}`)}
-                  >
-                    <BsFillSendArrowUpFill />{" "}
-                  </span>
-                </span>
+              <TableCell className="text-center w-1">
+                <Popover>
+                  <PopoverTrigger className="p-1 hover:bg-gray-200 cursor-pointer rounded-md ">
+                    <BsThreeDotsVertical />
+                  </PopoverTrigger>
+                  <PopoverContent className="w-max  p-1 pb-0">
+                    {" "}
+                    <span className="inline-flex gap-1">
+                      <span
+                        className="text-blue-800 rounded-full cursor-pointer hover:bg-blue-200 p-1"
+                        onClick={() => setOpenModalId(vendor.vendorID)}
+                      >
+                        <FaUserEdit />{" "}
+                      </span>
+                      <EditVendorModal
+                        title="Edit Vendor"
+                        open={openModalId === vendor.vendorID}
+                        onClose={() => {
+                          setOpenModalId(null);
+                        }}
+                        vendor={vendor}
+                        onUpdate={(updated) => {
+                          console.log("Updated", updated);
+                          setOpenModalId(null);
+                          toast("Content updated successfully...");
+                        }}
+                      />
+                      <span
+                        className="text-green-800 cursor-pointer rounded-full hover:bg-green-200 p-1"
+                        onClick={() => toast(`Email sent to ${vendor.email}`)}
+                      >
+                        <BsFillSendArrowUpFill />{" "}
+                      </span>
+                      <span
+                        className="text-red-800 cursor-pointer rounded-full hover:bg-red-200 p-1"
+                        onClick={() => toast(`Vendor deleted successfully...`)}
+                      >
+                        <FaTrash />{" "}
+                      </span>
+                    </span>
+                  </PopoverContent>
+                </Popover>
               </TableCell>
             </TableRow>
           ))}

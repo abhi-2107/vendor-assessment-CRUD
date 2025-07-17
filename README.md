@@ -5,15 +5,13 @@
 3. To start a fake API server run- `npx json-server db.json`  
    API will be served on `http://localhost:3000/vendors`
 
----
-
-GET /vendors
-GET /vendors/:id
-POST /vendors
-PUT /vendors/:id
-PATCH /vendors/:id
-DELETE /vendors/:id
-GET /vendors?\_page=1&\_per_page=25
+- GET /vendors
+- GET /vendors/:id
+- POST /vendors
+- PUT /vendors/:id
+- PATCH /vendors/:id
+- DELETE /vendors/:id
+- GET /vendors?_page=1&_per_page=25
 
 4. to start dev server run `npm run dev` on new terminal. UI will show up on `http://localhost:5173/`
 

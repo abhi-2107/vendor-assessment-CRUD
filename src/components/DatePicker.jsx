@@ -10,9 +10,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-function DatePicker() {
+function DatePicker({ onChange }) {
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState(null);
   return (
     <div className="flex flex-col gap-3 ">
       <Popover open={open} onOpenChange={setOpen}>
@@ -22,7 +22,7 @@ function DatePicker() {
             id="date"
             className="w-30 justify-between font-normal"
           >
-            {date ? date.toLocaleDateString() : "Select date"}
+            {date ? date.toISOString().split("T")[0] : "Select date"}
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
@@ -33,6 +33,8 @@ function DatePicker() {
             captionLayout="dropdown"
             onSelect={(date) => {
               setDate(date);
+              onChange(date.toISOString().split("T")[0]);
+              //   console.log(date.toISOString().split('T')[0])
               setOpen(false);
             }}
           />
