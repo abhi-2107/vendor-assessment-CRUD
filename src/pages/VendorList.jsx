@@ -3,12 +3,13 @@ import SelectDropdown from "@/components/SelectDropdown";
 import { Input } from "@/components/ui/input";
 import VendorTable from "@/components/VendorTable";
 import { getData } from "@/utils/getData";
-import { FaDownload, FaFilter, FaSearch } from "react-icons/fa";
+import { FaDownload, FaFilter } from "react-icons/fa";
 import React, { useEffect, useMemo, useState } from "react";
 import DatePicker from "@/components/DatePicker";
 import { Button } from "@/components/ui/button";
-import { CSVDownload, CSVLink } from "react-csv";
 import { downloadCSV } from "@/utils/getCsv";
+import { toast } from "react-toastify";
+import EditVendorModal from "@/components/EditVendorModal";
 
 const DEFAULT_API_STATE = {
   data: null,
@@ -19,6 +20,7 @@ function VendorList() {
   const [vendorsResponse, setVendorsResponse] = useState(DEFAULT_API_STATE);
   const [pageSize, setPageSize] = useState(10);
   const [pageNo, setPageNo] = useState(1);
+  const [showAddVendorModal, setShowAddVendorModal] = useState(false);
   const [search, setSearch] = useState({
     type: "name",
     value: "",
@@ -109,9 +111,11 @@ function VendorList() {
             </div>
           </div>
           <div className="flex  gap-5">
-            <Button className="border-2 me-auto py-5 rounded-full bg-white text-green-700 hover:bg-green-50 cursor-pointer hover:text-green-800 active:scale-97 hover:border-green-500 border-green-200 ">
-              Add Vendor
-            </Button>
+            <span onClick={() => setShowAddVendorModal(true)}>
+              <Button className="border-2 me-auto py-5 rounded-full bg-white text-green-700 hover:bg-green-50 cursor-pointer hover:text-green-800 active:scale-97 hover:border-green-500 border-green-200 ">
+                Add Vendor
+              </Button>
+            </span>
             <div className="flex justify-end flex-wrap gap-2">
               <span className="inline-flex items-center gap-2 font-semibold">
                 Page Size{" "}
@@ -224,6 +228,17 @@ function VendorList() {
           />
         </>
       )}
+
+      <EditVendorModal
+        title="Add Vendor"
+        open={showAddVendorModal}
+        onClose={() => setShowAddVendorModal(false)}
+        vendor=""
+        onUpdate={(update) => {
+          toast(JSON.stringify(update) + " vendor created successfully...");
+          setShowAddVendorModal(false);
+        }}
+      />
     </div>
   );
 }

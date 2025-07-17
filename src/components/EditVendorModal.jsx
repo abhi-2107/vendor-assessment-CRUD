@@ -80,7 +80,7 @@ export default function EditVendorModal({
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-wrap gap-4 py-2">
+          <div className="grid grid-cols-2  gap-4 py-2">
             <div>
               <Label>
                 Name
